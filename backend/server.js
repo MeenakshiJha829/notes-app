@@ -1,5 +1,5 @@
 const app =require('./app');
-const core=require('cors');
+const cors=require('cors');
 
 const port=3000;
 
