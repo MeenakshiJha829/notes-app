@@ -1,5 +1,6 @@
 import {useState,useEffect} from "react";
 import axios from "axios";
+import.meta.env.VITE_API_URL;
 
 function Dashboard() {
     const [notes,setNotes]=useState([]);
@@ -16,7 +17,7 @@ function Dashboard() {
     const fetchNotes =async()=>{
         try{
             const token=localStorage.getItem('token');
-        const res=await axios.get('http://localhost:3000/api/notes',{
+        const res=await axios.get(`${import.meta.env.VITE_API_URL}/api/notes`,{
             headers:{
                 Authorization:`Bearer ${token}`
             }
@@ -31,7 +32,7 @@ function Dashboard() {
     const createNote=async(e)=>{
         e.preventDefault();
         try{
-            await axios.post('http://localhost:3000/api/notes',
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/notes`,
                 {
                 title,
                 content
@@ -53,7 +54,7 @@ function Dashboard() {
 
     const deleteNote=async(id)=>{
         try{
-            await axios.delete( `http://localhost:3000/api/notes/${id}`,{
+            await axios.delete( `${import.meta.env.VITE_API_URL}/api/notes/${id}`,{
                 headers:{
                     Authorization:`Bearer ${token}`
                 }
@@ -67,7 +68,7 @@ function Dashboard() {
     const updateNote=async(e)=>{
         e.preventDefault();
         try{
-            await axios.put(`http://localhost:3000/api/notes/${editingId}`,
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/notes/${editingId}`,
                 {
                     title,
                     content
