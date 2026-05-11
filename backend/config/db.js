@@ -1,12 +1,13 @@
-const pg =require('pg');
-const {Pool}=pg;
 
-const pool =new Pool({
-    user:'postgres',
-    host:'localhost',
-    database:'notes_app',
-    password:'12345',
-    port:'5433',
-});
+const {Pool}=require('pg');
 
-module.exports=pool;
+function createPool() {
+    return new Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: process.env.NODE_ENV === "production"
+            ? { rejectUnauthorized: false }
+            : false
+    });
+}
+
+module.exports = createPool();

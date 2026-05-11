@@ -8,11 +8,14 @@ const signup=async(req,res)=>{
     const {email , password}= req.body;
     try{
     const hashedPassword= await bcrypt.hash(password,10);
-    const result=await pool.query('Insert into users(email,password) values($1,$2)Returning *',[email,hashedPassword]);
+    const result=await pool.query('Insert into users(email,password) values($1,$2) Returning *',[email,hashedPassword]);
     res.json({user:result.rows[0]});
     }catch(err){
-        res.status(500).json({message: err.message});
-    }
+        console.log("LOGIN/SIGNUP ERROR:", err);
+        return res.status(500).json({
+        message: err.message || "Internal Server Error"
+    });
+}
 
 }; 
 
@@ -38,7 +41,8 @@ const login=async(req,res)=>{
     );
     res.json({token});
 }catch(err){
-    res.status(500).json({message:err.message});
+    res.status(500).json({message: err.message || "Internal Server Error",
+        error: err});
 }
 
 }

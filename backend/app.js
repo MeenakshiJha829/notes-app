@@ -16,6 +16,10 @@ app.get('/protected',authMiddleware,(req,res)=>{
     res.json({message:"You are authorized",user:req.user});
 })
 
+app.get("/", (req, res) => {
+    res.send("Backend is running 🚀");
+});
+
 
 
 module.exports=app;
