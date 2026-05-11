@@ -34,16 +34,9 @@ function Login() {
         <button type="submit"  className="w-full bg-blue-500 text-white p-3 rounded">
             Login
         </button>
-        <p className="text-center mt-4">
-  Don't have an account?
-
-  <span
-    onClick={() => navigate('/signup')}
-    className="text-blue-500 cursor-pointer ml-1"
-  >
-    Signup
-  </span>
-</p>
+        <p className="text-center mt-4">Don't have an account?
+            <span onClick={() => navigate('/signup')} className="text-blue-500 cursor-pointer ml-1">Signup</span>
+        </p>
 
     </form>
     </div>
