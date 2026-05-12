@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+const API = import.meta.env.VITE_API_URL;
 
 
 function Signup() {
@@ -13,11 +14,13 @@ function Signup() {
   const handleSignup = async (e) => {
 
     e.preventDefault();
+    console.log("API URL:", API);
 
     try {
 
+
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/auth/signup`,
+        `${API}/api/auth/signup`,
         {
           email,
           password

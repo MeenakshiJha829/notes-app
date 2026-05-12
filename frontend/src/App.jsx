@@ -9,8 +9,10 @@ import {Routes,Route} from "react-router-dom";
 import Signup from './pages/Signup';
 
 function App() {
+  console.log(import.meta.env.VITE_API_URL);
   
           return(
+            
             <Routes>
               <Route path='/' element={<Login/>}></Route>
               <Route path='/Dashboard' element={<Dashboard/>}></Route>
