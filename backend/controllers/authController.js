@@ -6,6 +6,9 @@ const pool=require('../config/db')
 
 const signup=async(req,res)=>{
     const {email , password}= req.body;
+    if (!email || !password) {
+        return res.status(400).json({ message: "Email or password missing" });
+    }
     try{
     const hashedPassword= await bcrypt.hash(password,10);
     const result=await pool.query('Insert into users(email,password) values($1,$2) Returning *',[email,hashedPassword]);

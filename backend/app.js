@@ -13,6 +13,8 @@ app.use(express.json());
 app.use('/api/auth',authRoutes);
 app.use('/api/notes',notesRoutes);
 
+console.log("DB URL:", process.env.DATABASE_URL);
+
 app.get("/db-check", async (req, res) => {
      try {
         const result = await pool.query("SELECT current_database(), current_user");

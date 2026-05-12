@@ -1,13 +1,15 @@
 
 const {Pool}=require('pg');
 
-function createPool() {
-    return new Pool({
-        connectionString: process.env.DATABASE_URL,
-        ssl: process.env.NODE_ENV === "production"
-            ? { rejectUnauthorized: false }
-            : false
-    });
-}
 
-module.exports = createPool();
+console.log("DATABASE_URL =", process.env.DATABASE_URL);
+
+const pool=new Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl:  { rejectUnauthorized: false }
+            
+    });
+
+
+
+module.exports = pool;
