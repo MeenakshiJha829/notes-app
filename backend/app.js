@@ -24,6 +24,25 @@ app.get("/db-check", async (req, res) => {
     }
 });
 
+// app.get("/create-table", async (req, res) => {
+//   try {
+
+//     await pool.query(`
+//       CREATE TABLE IF NOT EXISTS users (
+//         id SERIAL PRIMARY KEY,
+//         email VARCHAR(255) UNIQUE NOT NULL,
+//         password TEXT NOT NULL
+//       )
+//     `);
+
+//     res.send("Users table created successfully");
+
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send(err.message);
+//   }
+// });
+
 app.get('/protected',authMiddleware,(req,res)=>{
     res.json({message:"You are authorized",user:req.user});
 })

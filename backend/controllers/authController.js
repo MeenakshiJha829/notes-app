@@ -11,13 +11,19 @@ const signup=async(req,res)=>{
     }
     try{
     const hashedPassword= await bcrypt.hash(password,10);
+    const existingUser = await pool.query('SELECT * FROM users WHERE email=$1',[email]);
+    if (existingUser.rows.length > 0) {
+        return res.status(400).json({
+            message: "Email already exists"
+        });
+    }
     const result=await pool.query('Insert into users(email,password) values($1,$2) Returning *',[email,hashedPassword]);
     res.json({user:result.rows[0]});
-    }catch(err){
-        console.log("LOGIN/SIGNUP ERROR:", err);
-        return res.status(500).json({
-        message: err.message || "Internal Server Error"
-    });
+    }catch (err) {
+        console.log("BACKEND ERROR:", err.message);
+        res.status(500).json({
+            message: err.message
+        });
 }
 
 }; 
